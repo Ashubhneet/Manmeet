@@ -16,7 +16,7 @@ public class Role {
     @Column(columnDefinition = "BINARY(16)")
     private Long id;
     private String authority;
-    @ManyToMany
+    @ManyToMany()
     private Set<User> user;
 
     public Long getId() {
@@ -42,4 +42,6 @@ public class Role {
     public void setAuthority(String authority) {
         this.authority = authority;
     }
+
 }
+

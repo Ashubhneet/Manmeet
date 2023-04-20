@@ -1,8 +1,8 @@
 package com.demo.project.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(name="USER_ID")
@@ -11,6 +11,8 @@ public class Seller extends User {
     String GST;
     int companyContact;
     String companyName;
+    @OneToMany
+    private List<Product> productList;
 
     public String getGST() {
         return GST;
@@ -32,7 +34,16 @@ public class Seller extends User {
         return companyName;
     }
 
+    public List<Product> getProductList() {
+       return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+       this.productList = productList;
+   }
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
+
 }

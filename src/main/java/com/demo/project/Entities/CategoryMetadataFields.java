@@ -7,8 +7,8 @@ import java.util.UUID;
 @Table(name="categoryMetadata")
 public class CategoryMetadataFields {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "category_id")
-    @SequenceGenerator(name = "categoryid",sequenceName = "category_id",initialValue = 1,allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "categoryMeta_id")
+    @SequenceGenerator(name = "categoryMetaid",sequenceName = "categoryMeta_id",initialValue = 1,allocationSize = 1)
     private Long id;
     private String name;
 
@@ -27,4 +27,6 @@ public class CategoryMetadataFields {
     public void setName(String name) {
         this.name = name;
     }
+
 }
+

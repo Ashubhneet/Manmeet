@@ -1,10 +1,9 @@
 package com.demo.project.Entities;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
-import java.util.UUID;
+
 @Entity
 @Table(name="category")
 public class Category {
@@ -14,7 +13,41 @@ public class Category {
     @SequenceGenerator(name = "Category_id",sequenceName = "Categoryid",initialValue = 1,allocationSize = 1)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="category_id")
-    private List<Category> category;
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    private  Category category;
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private List<Product> productList1;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category getCategory() {
+        return  category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Product> getProductList1() {
+        return productList1;
+    }
+
+    public void setProductList1(List<Product> productList1) {
+        this.productList1 = productList1;
+    }
 }
