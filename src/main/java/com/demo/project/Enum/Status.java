@@ -14,5 +14,5 @@ public enum Status {
     PickupComplete,
     RefundInitiated,
     RefundCompleted,
-    CLosed
+    Closed
 }

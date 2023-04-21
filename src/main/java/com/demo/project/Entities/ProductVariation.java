@@ -3,6 +3,8 @@ package com.demo.project.Entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
+
 @Entity
 public class ProductVariation implements Serializable {
     @Id
@@ -15,6 +17,7 @@ public class ProductVariation implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     private Byte[] Image_name;
     private boolean isActive;
+    @Column(columnDefinition = "json")
     private String metadata;
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -22,6 +25,8 @@ public class ProductVariation implements Serializable {
     @OneToOne(mappedBy = "productVariation",cascade = CascadeType.ALL)
     private OrderProduct orderProduct;
 
+    @OneToMany(mappedBy = "productVariation",cascade = CascadeType.ALL)
+    private Set<Cart> carts;
     public Long getId() {
         return id;
     }

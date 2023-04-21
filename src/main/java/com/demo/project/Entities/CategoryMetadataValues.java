@@ -2,16 +2,30 @@ package com.demo.project.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Entity
 public class CategoryMetadataValues {
     @EmbeddedId
-   private CategoryMetadataValuesId categoryMetadataValuesId=new CategoryMetadataValuesId();
+   private CategoryMetadataValuesId categoryMetadataValuesId;
     @ManyToOne
-    @MapsId("CategoryId")
+    @MapsId("category")
     private Category category;
 
     @ManyToOne
-    @MapsId("CategoryMetadataId")
+    @MapsId("categoryMetadataFields")
     private CategoryMetadataFields categoryMetadataFields;
+
+    private String valuesOfField;
+
+
+ public List<String> getStrings() {
+  return Arrays.asList(valuesOfField.split(","));
+ }
+
+ public void setStrings(List<String> list) {
+  valuesOfField= String.join(",", list);
+ }
 
 }

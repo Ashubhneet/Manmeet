@@ -15,17 +15,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_id")
     @SequenceGenerator(name = "user_id",sequenceName = "userid",initialValue = 1,allocationSize = 1)
-    private Long id;
+    private Long userId;
 
     @Column(unique = true)
     private String email;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String middleName;
+    private String lastName;
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$",
-            message = "password must be min 4 and max 12 length containing atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
+            message = "password must be min 8 and max 15 length containing atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
     private String password;
     @Column(name = "is_delete", nullable = false)
-    private boolean is_deleted=Boolean.FALSE;
+    private boolean is_deleted;
     @Column(name = "is_active")
     private boolean is_active;
     @Column(name = "is_expired", nullable = false)
@@ -40,8 +41,7 @@ public class User {
 //    @JoinTable(name = "USER_ROLE",joinColumns = @JoinColumn(name="User_ID",referencedColumnName = "UUID")
 //            , inverseJoinColumns = @JoinColumn(name="ROLE_ID",referencedColumnName = "UUID"))
     private Set<Role> role;
-    @OneToMany(mappedBy = "user",cascade =CascadeType.ALL)
-    private List<Address>address;
+
     public String getEmail() {
         return email;
     }
@@ -51,19 +51,19 @@ public class User {
     }
 
     public String getFirst_name() {
-        return first_name;
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirst_name(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLast_name() {
-        return last_name;
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLast_name(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getPassword() {
@@ -123,11 +123,11 @@ public class User {
     }
 
     public Long getId() {
-        return id;
+        return userId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.userId = userId;
     }
 
     public Set<Role> getRole() {
@@ -138,12 +138,5 @@ public class User {
         this.role = role;
     }
 
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(List<Address> address) {
-        this.address = address;
-    }
 }
 

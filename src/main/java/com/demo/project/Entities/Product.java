@@ -3,6 +3,7 @@ package com.demo.project.Entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="product")
@@ -24,7 +25,7 @@ public class Product {
     private boolean isDeleted;
     private String brand;
     @ManyToOne
-    @JoinColumn(name="User_id")
+//    @JoinColumn(name="USER_ID")
     private Seller seller;
 
     @ManyToOne
@@ -33,6 +34,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
     private List<ProductVariation> productVariationList;
+
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    private Set<ProductReview> productReview;
 
     public Long getId() {
         return id;

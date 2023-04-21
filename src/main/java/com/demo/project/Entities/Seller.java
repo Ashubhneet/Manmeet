@@ -5,14 +5,17 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@PrimaryKeyJoinColumn(name="USER_ID")
+//@PrimaryKeyJoinColumn(name="USERID")
 public class Seller extends User {
-@Column(unique = true)
+    @Column(unique = true)
     String GST;
     int companyContact;
     String companyName;
-    @OneToMany
+    @OneToMany(mappedBy = "seller")
     private List<Product> productList;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 
     public String getGST() {
         return GST;

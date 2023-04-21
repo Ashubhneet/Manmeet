@@ -3,9 +3,9 @@ package com.demo.project.Entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name="category")
 public class Category {
 
     @Id
@@ -18,6 +18,9 @@ public class Category {
     private  Category category;
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private List<Product> productList1;
+
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
+    private Set<CategoryMetadataValues> categoryMetadataValues;
 
     public Long getId() {
         return id;

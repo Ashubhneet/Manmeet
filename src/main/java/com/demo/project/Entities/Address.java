@@ -3,6 +3,7 @@ package com.demo.project.Entities;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.List;
 import java.util.UUID;
 @Entity
 @Table(name="address")
@@ -17,9 +18,12 @@ public class Address {
     private String addressLine;
     private String zip_code;
    private String label;
-   @ManyToOne
-   @JoinColumn(name="User_id")
-    private User user;
+    @OneToMany(mappedBy = "add",cascade =CascadeType.ALL)
+    private List<Customer> customer;
+
+    @OneToOne(mappedBy = "address",cascade = CascadeType.ALL)
+    private Seller seller;
+
 
     public Long getId() {
         return id;
@@ -75,14 +79,6 @@ public class Address {
 
     public void setLabel(String label) {
         this.label = label;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
 
