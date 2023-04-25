@@ -1,28 +1,33 @@
 package com.demo.project.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import jakarta.persistence.Column;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.UniqueElements;
+
 public class CustomerDto {
         private Long id;
-        @NotEmpty
+
         private String firstName;
-        @NotEmpty
+
         private String lastName;
         @NotEmpty(message = "Email should not be empty")
-        @Email
+        @Email(message = "valid email is required")
         private String email;
-        @NotEmpty(message = "Password should not be empty")
+
         @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$",
                 message = "password must be min 8 and max 15 length containing atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
         private String password;
-        @NotEmpty(message = "Password should not be empty")
-        @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$",
+
+        @jakarta.validation.constraints.Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$",
                 message = "password must be min 8 and max 15 length containing atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
         private String confirmPassword;
-        @Size(min=10,max = 10,message = "minimum 10 length requires")
-        private long phonenumber;
+      //  @Size(min=10,max = 10,message =@Pattern(regexp="(^$|[0-9]{10})")  "minimum 10 length requires")
+     //   @Range(min=9,max=11,message ="10 digits are required")
+    @NotNull
+    @Size(min = 10,max = 10)
+        private String phonenumber;
 
         public Long getId() {
                 return id;
@@ -72,11 +77,11 @@ public class CustomerDto {
                 this.confirmPassword = confirmPassword;
         }
 
-        public long getPhonenumber() {
+        public String getPhonenumber() {
                 return phonenumber;
         }
 
-        public void setPhonenumber(long phonenumber) {
+        public void setPhonenumber(String phonenumber) {
                 this.phonenumber = phonenumber;
         }
 }

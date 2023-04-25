@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 //@PrimaryKeyJoinColumn(name="USER_Id")
 public class Customer extends User {
-    long contact;
+    String contact;
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     List<Orders>orders;
 
@@ -22,11 +22,11 @@ public class Customer extends User {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     private Set<Cart> cart;
 
-    public long getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(long contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 

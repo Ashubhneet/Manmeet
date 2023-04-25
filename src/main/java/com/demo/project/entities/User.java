@@ -3,13 +3,16 @@ package com.demo.project.entities;
 import jakarta.persistence.*;
 
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name="USER")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User {
+public class User extends Auditable<String> implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_id")
     @SequenceGenerator(name = "user_id",sequenceName = "userid",initialValue = 1,allocationSize = 1)
@@ -38,7 +41,7 @@ public class User {
     @ManyToMany(mappedBy = "user",cascade=CascadeType.ALL)
 //    @JoinTable(name = "USER_ROLE",joinColumns = @JoinColumn(name="User_ID",referencedColumnName = "UUID")
 //            , inverseJoinColumns = @JoinColumn(name="ROLE_ID",referencedColumnName = "UUID"))
-    private Set<Role> role;
+    private List<Role> role;
 
     public String getEmail() {
         return email;
@@ -128,11 +131,11 @@ public class User {
         this.userId = userId;
     }
 
-    public Set<Role> getRole() {
+    public List<Role> getRole() {
         return role;
     }
 
-    public void setRole(Set<Role> role) {
+    public void setRole(List<Role> role) {
         this.role = role;
     }
 

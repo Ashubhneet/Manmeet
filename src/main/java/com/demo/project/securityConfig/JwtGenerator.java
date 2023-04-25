@@ -15,7 +15,7 @@ public class JwtGenerator {
     public String generateToken(String email)
     {
         Date currentDate=new Date();
-        Date expireyDate=new Date(currentDate.getTime()+100);
+        Date expireyDate=new Date(currentDate.getTime()+180000000);
          String token=Jwts.builder()
                  .setSubject(email)
                  .setIssuedAt(new Date())

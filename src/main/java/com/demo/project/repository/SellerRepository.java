@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface SellerRepository extends CrudRepository<Seller,Long> {
     Seller findByEmailIgnoreCase(String email);
+    Boolean existsByEmail(String Email);
 }

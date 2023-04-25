@@ -2,7 +2,12 @@ package com.demo.project.repository;
 import com.demo.project.entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer,Long> {
-    Customer findByEmail(String Email);
+import java.util.List;
+import java.util.Optional;
 
+public interface CustomerRepository extends JpaRepository<Customer,Long> {
+    Boolean existsByEmail(String Email);
+
+
+    Optional<Customer> findByEmail(String mail);
 }
