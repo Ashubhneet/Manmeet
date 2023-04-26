@@ -24,7 +24,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = getJWTFromRequest(request);
-        if (StringUtils.hasText(token) && jwtGenerator.ValidateToken(token)) {
+        if (StringUtils.hasText(token) && jwtGenerator.validateToken(token)) {
             String email = jwtGenerator.getUserEmailFromJwt(token);
             UserDetails userDetails;
             userDetails = customUserDetailsService.loadUserByUsername(email);
@@ -38,8 +38,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     private String getJWTFromRequest(HttpServletRequest request) {
         String Token = request.getHeader("Authorization");
-        if (StringUtils.hasText(Token) && Token.startsWith("register ")) {
-            return Token.substring(7);
+        if (StringUtils.hasText(Token) && Token.startsWith("Bearer ")) {
+            return Token.substring(7,Token.length());
         }
         return null;
     }

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class EmailService {
@@ -18,7 +20,7 @@ public class EmailService {
             simpleMailMessage.setSubject("Email Activation");
             if(usertype.equals("customer"))
             simpleMailMessage.setText("Your account is registered please activate the account by " +
-                    "clicking below link:http://localhost:8080/customer/register "+token);
+                    "clicking below link:http://localhost:8080/auth/customer/activation?token=" +token);
             else
                 simpleMailMessage.setText("Your account is registered please activate the account by " +
                         "clicking below link:http://localhost:8080/supplier/register "+token);

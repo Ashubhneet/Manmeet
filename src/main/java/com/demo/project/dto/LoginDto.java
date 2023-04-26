@@ -1,8 +1,8 @@
 package com.demo.project.dto;
 
 public class LoginDto {
-private String email;
-private String password;
+    private String email;
+    private String password;
 
     public String getEmail() {
         return email;

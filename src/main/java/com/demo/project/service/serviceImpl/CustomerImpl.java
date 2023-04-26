@@ -45,14 +45,15 @@ public class CustomerImpl implements CustomerService {
     }
 
     public ResponseEntity<?> activationCustomer(String token) throws Exception{
-        if(jwtService.ValidateToken(token)) {
-            String mail = jwtService.getUserEmailFromJwt(token);
-            Customer customer = customerRepo.findByEmail(mail).get();
-            customer.setIs_active(true);
-            customerRepo.save(customer);
-            return ResponseEntity.ok("Account is activated");
+        if(!jwtService.validateToken(token)) {
+            return ResponseEntity.badRequest().body("Token is expired or invalid");
+
         }
-        return ResponseEntity.badRequest().body("Token is expired or invalid");
+        String mail = jwtService.getUserEmailFromJwt(token);
+        Customer customer = customerRepo.findByEmail(mail).get();
+        customer.setIs_active(true);
+        customerRepo.save(customer);
+        return ResponseEntity.ok("Account is activated");
         }
     }
 

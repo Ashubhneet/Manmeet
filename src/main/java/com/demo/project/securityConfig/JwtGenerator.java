@@ -15,27 +15,27 @@ public class JwtGenerator {
     public String generateToken(String email)
     {
         Date currentDate=new Date();
-        Date expireyDate=new Date(currentDate.getTime()+180000000);
+        Date expireyDate=new Date(currentDate.getTime()+1800000);
          String token=Jwts.builder()
                  .setSubject(email)
-                 .setIssuedAt(new Date())
+                 .setIssuedAt(currentDate)
                  .setExpiration(expireyDate)
-                 .signWith(SignatureAlgorithm.HS512,"Register")
+                 .signWith(SignatureAlgorithm.HS512,"register")
                  .compact();
         return token;
     }
     public String getUserEmailFromJwt(String token)
     {
         Claims claims=Jwts.parser()
-                .setSigningKey("Register")
+                .setSigningKey("register")
                 .parseClaimsJws(token)
                 .getBody();
                 return claims.getSubject();
     }
-    public boolean ValidateToken(String token){
+    public boolean validateToken(String token){
         try
         {
-            Jwts.parser().setSigningKey("Register").parseClaimsJws(token);
+            Jwts.parser().setSigningKey("register").parseClaimsJws(token);
             return true;
         }
         catch (Exception ex)

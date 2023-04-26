@@ -1,5 +1,5 @@
 package com.demo.project.securityConfig;
-/*
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +18,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 //@EnableMethodSecurity
 public class SecurityConfiguration {
+    @Autowired
     private JwtAuthEntryPoint jwtAuthEntryPoint;
-    //    private JWTAuthenticationFilter jwtAuthenticationFilter;
+
+
     @Autowired
     private CustomUserDetailService customUserDetailsService;
 
@@ -37,9 +39,6 @@ public class SecurityConfiguration {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authenticationProvider(authenticationProvider())
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
@@ -50,13 +49,7 @@ public class SecurityConfiguration {
         return httpSecurity.build();
     }
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider(){
-//        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(userDetailsService());
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        return authenticationProvider;
-//    }
+
 
     @Bean
     public AuthenticationManager authenticationManager(
@@ -73,4 +66,4 @@ public class SecurityConfiguration {
     public JWTAuthenticationFilter jwtAuthenticationFilter(){
         return new JWTAuthenticationFilter();
     }
-}*/
+}
